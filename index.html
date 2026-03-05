@@ -533,28 +533,25 @@
     .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
 
-    /* ── HERO MOBILE FIXES ── */
     .hero {
       padding: 6rem 1.25rem 3rem;
-      /* prevent any child from escaping viewport */
       overflow-x: hidden;
     }
 
     .hero-content {
       grid-template-columns: 1fr;
       gap: 2.5rem;
-      /* ensure content never exceeds viewport width */
       width: 100%;
       max-width: 100%;
     }
 
-    /* Fix hero name overflow — scale down aggressively on small screens */
+    /* ── FIX: scale hero name to fit on one line ── */
     .hero-name {
-      font-size: clamp(2.2rem, 10vw, 3.5rem);
-      word-break: break-word;
+      font-size: clamp(1.8rem, 7.5vw, 3.5rem);
+      word-break: normal;
+      white-space: nowrap;
     }
 
-    /* Stack buttons vertically on very small screens, full width */
     .hero-actions {
       flex-direction: column;
       gap: 0.75rem;
@@ -566,10 +563,9 @@
       padding: 0.85rem 1rem;
     }
 
-    /* Fix stat grid — constrain to page width with equal padding on both sides */
     .hero-right {
       width: 100%;
-      padding: 0; /* no extra padding, the hero section padding handles it */
+      padding: 0;
     }
     .stat-grid {
       width: 100%;
@@ -585,8 +581,14 @@
     .story-section { padding: 5rem 1.25rem; }
     .mobile-menu { padding: 5rem 1.5rem 3rem; }
 
-    /* Tagline font size on mobile */
     .hero-tagline { font-size: 1rem; }
+  }
+
+  /* Extra small screens (< 380px) */
+  @media (max-width: 380px) {
+    .hero-name {
+      font-size: clamp(1.5rem, 7vw, 2rem);
+    }
   }
 </style>
 </head>
@@ -704,7 +706,7 @@
           <div class="meta-row"><span class="meta-key">Location</span><span class="meta-val">Durban, South Africa</span></div>
           <div class="meta-row"><span class="meta-key">Background</span><span class="meta-val">Carpenter → Self-taught Dev</span></div>
           <div class="meta-row"><span class="meta-key">Email</span><span class="meta-val"><a href="mailto:miguelmarcoramcharan@gmail.com">miguelmarcoramcharan@gmail.com</a></span></div>
-          <div class="meta-row"><span class="meta-key">Phone</span><span class="meta-val">081 149 8474</span></div>
+          <div class="meta-row"><span class="meta-key">Phone</span><span class="meta-val">061 149 8474</span></div>
           <div class="meta-row"><span class="meta-key">Status</span><span class="meta-val" style="color: var(--green);">Open to opportunities</span></div>
         </div>
       </div>
