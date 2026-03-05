@@ -533,16 +533,60 @@
     .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
 
-    section { padding: 5rem 1.5rem; }
-    .hero { padding: 6rem 1.5rem 3rem; }
-    .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+    /* ── HERO MOBILE FIXES ── */
+    .hero {
+      padding: 6rem 1.25rem 3rem;
+      /* prevent any child from escaping viewport */
+      overflow-x: hidden;
+    }
+
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      /* ensure content never exceeds viewport width */
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Fix hero name overflow — scale down aggressively on small screens */
+    .hero-name {
+      font-size: clamp(2.2rem, 10vw, 3.5rem);
+      word-break: break-word;
+    }
+
+    /* Stack buttons vertically on very small screens, full width */
+    .hero-actions {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .hero-actions .btn-primary,
+    .hero-actions .btn-secondary {
+      text-align: center;
+      width: 100%;
+      padding: 0.85rem 1rem;
+    }
+
+    /* Fix stat grid — constrain to page width with equal padding on both sides */
+    .hero-right {
+      width: 100%;
+      padding: 0; /* no extra padding, the hero section padding handles it */
+    }
+    .stat-grid {
+      width: 100%;
+    }
+
+    section { padding: 5rem 1.25rem; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .projects-grid { grid-template-columns: 1fr; }
     .project-card.featured { grid-column: span 1; }
     .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; }
-    .story-section { padding: 5rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.25rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .story-section { padding: 5rem 1.25rem; }
     .mobile-menu { padding: 5rem 1.5rem 3rem; }
+
+    /* Tagline font size on mobile */
+    .hero-tagline { font-size: 1rem; }
   }
 </style>
 </head>
