@@ -133,188 +133,102 @@
   .filter-btn:hover { border-color: var(--border2); color: var(--text); }
   .filter-btn.active { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
 
-  /* PROJECTS GRID — image-first with slide-up overlay (matches homepage style) */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 16px;
-    margin-bottom: 4rem;
-    opacity: 0;
-    animation: fadeUp .6s .4s forwards;
-  }
+  /* PROJECTS GRID */
+  .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1px; }
 
   /* PROJECT CARD */
-  .proj-card {
+  .proj-card { background: var(--bg); padding: 2rem; position: relative; overflow: hidden; display: flex; flex-direction: column; transition: background .25s, opacity .5s, transform .5s; opacity: 0; transform: translateY(20px); }
+  .proj-card.visible { opacity: 1; transform: translateY(0); }
+  .proj-card:hover { background: var(--surface); }
+  .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+  .proj-card:hover::before { transform: scaleX(1); }
+
+  .proj-card.span-5  { grid-column: span 5; }
+  .proj-card.span-4  { grid-column: span 4; }
+  .proj-card.span-3  { grid-column: span 3; }
+  .proj-card.span-7  { grid-column: span 7; }
+  .proj-card.span-6  { grid-column: span 6; }
+  .proj-card.span-12 { grid-column: span 12; }
+
+  /* ── BANNER: real image ── */
+  .proj-banner {
+    width: 100%;
+    height: 140px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
-    display: block;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    transition: border-color 0.35s;
+    flex-shrink: 0;
+    transition: border-color .25s;
   }
+  .proj-card:hover .proj-banner { border-color: var(--border2); }
 
-  .proj-card:hover { border-color: var(--cyan); }
-
-  /* Featured card spans full width, taller */
-  .proj-card.featured {
-    grid-column: span 12;
-    aspect-ratio: 21 / 7;
-  }
-
-  /* Regular cards span 6 each */
-  .proj-card.half {
-    grid-column: span 6;
-    aspect-ratio: 4 / 3;
-  }
-
-  /* The screenshot image */
-  .proj-card img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+  .proj-banner img {
+    width: 100%; height: 100%;
     object-fit: cover;
     object-position: center top;
-    transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), filter 0.55s ease;
-    filter: brightness(0.85) saturate(1.05);
+    display: block;
+    transition: transform .45s cubic-bezier(0.4,0,0.2,1), filter .45s;
+    filter: brightness(0.75) saturate(0.9);
+  }
+  .proj-card:hover .proj-banner img {
+    transform: scale(1.06);
+    filter: brightness(0.9) saturate(1.1);
   }
 
-  .proj-card:hover img {
-    transform: scale(1.05);
-    filter: brightness(0.35) saturate(0.6);
-  }
-
-  /* Slide-up overlay */
-  .proj-overlay {
+  /* Project name label sits over the image */
+  .banner-label {
     position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 2rem 2.5rem;
-    background: linear-gradient(
-      to top,
-      rgba(0,8,16,0.97) 0%,
-      rgba(0,8,16,0.8) 45%,
-      rgba(0,8,16,0.05) 100%
-    );
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1);
-    pointer-events: none;
-  }
-
-  .proj-card:hover .proj-overlay {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Number badge — always visible */
-  .proj-num {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    font-size: 0.58rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
-    padding: 0.25rem 0.65rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    z-index: 2;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .proj-card:hover .proj-num { color: var(--cyan); border-color: rgba(0,212,255,0.3); }
-
-  /* Badge (Live / Work) — always visible top-right area */
-  .proj-badge-wrap {
-    position: absolute;
-    top: 1.25rem;
-    right: 4rem;
-    display: flex;
-    gap: 0.4rem;
-    z-index: 2;
-  }
-  .badge {
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    backdrop-filter: blur(6px);
-  }
-  .badge-live { background: rgba(0,255,163,0.12); color: var(--green); border: 1px solid rgba(0,255,163,0.25); }
-  .badge-work { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
-  .badge-personal { background: rgba(255,107,53,0.1); color: var(--orange); border: 1px solid rgba(255,107,53,0.25); }
-
-  /* Arrow — always visible */
-  .proj-arrow {
-    position: absolute;
-    top: 1.25rem; right: 1.25rem;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    color: rgba(255,255,255,0.5);
-    transition: border-color 0.3s, color 0.3s, transform 0.3s, background 0.3s;
-    z-index: 2;
-    text-decoration: none;
-  }
-  .proj-card:hover .proj-arrow {
-    color: var(--cyan);
-    border-color: var(--cyan);
-    background: rgba(0,212,255,0.1);
-    transform: translate(3px,-3px);
-  }
-
-  /* Overlay text — stagger in */
-  .proj-name {
+    bottom: 0; left: 0; right: 0;
+    padding: 0.6rem 0.85rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1.8rem;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
     color: var(--white);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-    transform: translateY(12px);
-    transition: transform 0.4s 0.05s cubic-bezier(0.4,0,0.2,1), color 0.2s;
-  }
-  .proj-card.half .proj-name { font-size: 1.35rem; }
-  .proj-card:hover .proj-name { transform: translateY(0); color: var(--cyan); }
-
-  .proj-desc {
-    font-size: 0.77rem;
-    line-height: 1.65;
-    color: rgba(200,214,224,0.85);
-    margin-bottom: 1rem;
-    transform: translateY(12px);
-    transition: transform 0.4s 0.09s cubic-bezier(0.4,0,0.2,1);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .proj-card:hover .proj-desc { transform: translateY(0); }
-
-  .proj-tags {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-    transform: translateY(10px);
-    transition: transform 0.4s 0.13s cubic-bezier(0.4,0,0.2,1);
-  }
-  .proj-card:hover .proj-tags { transform: translateY(0); }
-
-  .tag {
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--cyan);
-    border: 1px solid rgba(0,212,255,0.35);
-    padding: 0.2rem 0.55rem;
-    background: rgba(0,212,255,0.08);
-    backdrop-filter: blur(4px);
   }
+
+  .proj-number { font-size: 0.58rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.75rem; }
+  .proj-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white); margin-bottom: 0.5rem; transition: color .2s; }
+  .proj-card:hover .proj-name { color: var(--cyan); }
+  .proj-desc { font-size: 0.73rem; line-height: 1.65; color: var(--muted); margin-bottom: 1.25rem; flex: 1; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.5rem; }
+  .tag { font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); padding: 0.2rem 0.5rem; background: var(--cyan-dim); }
+  .tag.alt { color: var(--muted); border-color: var(--border); background: transparent; }
+
+  .proj-badges { display: flex; gap: 0.4rem; margin-bottom: 0.75rem; }
+  .badge { font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; }
+  .badge-live { background: rgba(0,255,163,0.1); color: var(--green); border: 1px solid rgba(0,255,163,0.2); }
+  .badge-work { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+  .badge-personal { background: rgba(255,107,53,0.1); color: var(--orange); border: 1px solid rgba(255,107,53,0.2); }
+
+  .proj-actions { display: flex; gap: 0.5rem; margin-top: auto; }
+  .proj-btn { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.55rem 1rem; text-decoration: none; cursor: none; transition: all .2s; flex: 1; text-align: center; display: block; }
+  .proj-btn-primary { background: var(--cyan); color: var(--bg); border: 1px solid var(--cyan); }
+  .proj-btn-primary:hover { box-shadow: 0 0 20px var(--cyan-glow); transform: translateY(-1px); }
+  .proj-btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .proj-btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .proj-card.featured-wide { flex-direction: row; gap: 2.5rem; align-items: center; padding: 2.5rem 3rem; }
+  .proj-card.featured-wide .proj-banner { width: 280px; height: 180px; flex-shrink: 0; margin-bottom: 0; }
+  .proj-card.featured-wide .proj-content { flex: 1; }
+  .proj-card.featured-wide .proj-name { font-size: 1.5rem; }
+  .proj-card.featured-wide .proj-desc { font-size: 0.78rem; }
+
+  .proj-card.quote-card { background: var(--cyan-dim); border-left: 3px solid var(--cyan); justify-content: center; align-items: flex-start; padding: 2rem; }
+  .proj-card.quote-card::before { display: none; }
+  .quote-text { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.05rem; color: var(--white); line-height: 1.6; margin-bottom: 0.5rem; }
+  .quote-author { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); }
+
+  .proj-card.stat-card { justify-content: center; align-items: center; text-align: center; background: var(--bg2); }
+  .proj-card.stat-card::before { display: none; }
+  .stat-big { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem; color: var(--white); line-height: 1; }
+  .stat-big span { color: var(--cyan); }
+  .stat-sub { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+
+  .proj-card.hidden { display: none; }
 
   /* BOTTOM CTA */
   .bottom-cta { margin-top: 4rem; padding: 3rem; border: 1px solid var(--border); background: var(--bg2); display: flex; align-items: center; justify-content: space-between; gap: 2rem; opacity: 0; animation: fadeUp .6s .6s forwards; }
@@ -341,14 +255,14 @@
     .nav-links, .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
     .page { padding: 6rem 1rem 4rem; }
-    .projects-grid { grid-template-columns: 1fr; gap: 12px; }
-    .proj-card.featured, .proj-card.half { grid-column: span 1; aspect-ratio: 16 / 9; }
-    /* Always show overlay on mobile */
-    .proj-overlay { opacity: 1; transform: translateY(0); background: linear-gradient(to top, rgba(0,8,16,0.96) 0%, rgba(0,8,16,0.65) 55%, rgba(0,8,16,0.05) 100%); }
-    .proj-name, .proj-desc, .proj-tags { transform: translateY(0); }
-    .proj-card img { filter: brightness(0.45) saturate(0.7); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .proj-card.span-5, .proj-card.span-4, .proj-card.span-3,
+    .proj-card.span-7, .proj-card.span-6, .proj-card.span-12 { grid-column: span 1; }
+    .proj-card.featured-wide { flex-direction: column; }
+    .proj-card.featured-wide .proj-banner { width: 100%; }
     .bottom-cta { flex-direction: column; text-align: center; }
     footer { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+    .mobile-menu { padding: 5rem 1.5rem 3rem; }
   }
 </style>
 </head>
@@ -399,7 +313,7 @@
         <h1>Things I've <span>shipped.</span></h1>
       </div>
       <div class="hero-right">
-        <p>Real projects. Real code. All of them live and running right now.</p>
+        <p>Real projects. Real code. Most of them live and running right now.</p>
       </div>
     </div>
   </div>
@@ -418,69 +332,135 @@
   <!-- PROJECTS GRID -->
   <div class="projects-grid" id="projectsGrid">
 
-    <!-- 01 — Truendo (featured, full width) -->
-    <a href="https://truendo.com" target="_blank" class="proj-card featured" data-tags="live work react fullstack">
-      <img src="/images/truendo.png" alt="Truendo" />
-      <div class="proj-num">01 — Featured</div>
-      <div class="proj-badge-wrap">
-        <span class="badge badge-work">Work</span>
-        <span class="badge badge-live">● Production</span>
+    <!-- 01 — LinkBio (featured wide) -->
+    <div class="proj-card span-12 featured-wide reveal" data-tags="live personal react">
+      <div class="proj-banner">
+        <img src="/images/nexus.png" alt="LinkBio preview" />
+        <div class="banner-label">LinkBio</div>
       </div>
-      <div class="proj-arrow">↗</div>
-      <div class="proj-overlay">
-        <div class="proj-name">Truendo</div>
-        <div class="proj-desc">A production-grade consent management platform built at Decidio. Full-stack development on a live product serving real enterprise clients — handling complex privacy compliance flows, real-time data management, and high-availability infrastructure.</div>
-        <div class="proj-tags">
-          <span class="tag">TypeScript</span>
-          <span class="tag">React</span>
-          <span class="tag">Node</span>
-          <span class="tag">Go</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Kubernetes</span>
+      <div class="proj-content">
+        <div class="proj-badges"><span class="badge badge-live">● Live</span><span class="badge badge-personal">Personal</span></div>
+        <div class="proj-number">01 — Featured</div>
+        <div class="proj-name">LinkBio</div>
+        <div class="proj-desc">Personal linkbio website showcasing all links with analytics and custom themes. A modern, customizable bio link platform where creators can showcase their work, social media, and important links in one beautiful, shareable page.</div>
+        <div class="proj-tags"><span class="tag">React</span><span class="tag">Express.js</span><span class="tag">MongoDB</span><span class="tag alt">Full Stack</span><span class="tag alt">Analytics</span></div>
+        <div class="proj-actions">
+          <a href="#" class="proj-btn proj-btn-primary">View Live →</a>
+          <a href="#" class="proj-btn proj-btn-secondary">Project Details</a>
         </div>
       </div>
-    </a>
+    </div>
 
-    <!-- 02 — Marcos Palace -->
-    <a href="https://casino-alpha-two.vercel.app/" target="_blank" class="proj-card half" data-tags="live personal react">
-      <img src="/images/casino.png" alt="Marcos Palace" />
-      <div class="proj-num">02</div>
-      <div class="proj-badge-wrap">
-        <span class="badge badge-live">● Live</span>
+    <!-- 02 — Formio -->
+    <div class="proj-card span-5 reveal" data-tags="personal react fullstack">
+      <div class="proj-banner">
+        <img src="/images/nexus.png" alt="Formio preview" />
+        <div class="banner-label">Formio</div>
       </div>
-      <div class="proj-arrow">↗</div>
-      <div class="proj-overlay">
-        <div class="proj-name">Marcos Palace</div>
-        <div class="proj-desc">A modern, fully interactive casino suite platform. Clean UI, smooth animations, and a polished experience built entirely in React.</div>
-        <div class="proj-tags">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">Canvas</span>
-        </div>
-      </div>
-    </a>
+      <div class="proj-number">02</div>
+      <div class="proj-name">Formio</div>
+      <div class="proj-desc">Dynamic form builder with drag-and-drop interface and real-time validation. Designed to showcase skills and portfolio projects in a clean, structured format.</div>
+      <div class="proj-tags"><span class="tag">React</span><span class="tag">Express.js</span><span class="tag">MongoDB</span></div>
+      <div class="proj-actions"><a href="#" class="proj-btn proj-btn-primary">View →</a><a href="#" class="proj-btn proj-btn-secondary">Details</a></div>
+    </div>
 
-    <!-- 03 — Nexus -->
-    <a href="https://nexus-theta-ivory.vercel.app" target="_blank" class="proj-card half" data-tags="live personal react">
-      <img src="/images/nexus.png" alt="Nexus" />
-      <div class="proj-num">03</div>
-      <div class="proj-badge-wrap">
-        <span class="badge badge-live">● Live</span>
+    <!-- 03 — PortfolioBio -->
+    <div class="proj-card span-4 reveal" data-tags="personal react">
+      <div class="proj-banner">
+        <img src="/images/nexus.png" alt="PortfolioBio preview" />
+        <div class="banner-label">PortfolioBio</div>
       </div>
-      <div class="proj-arrow">↗</div>
-      <div class="proj-overlay">
-        <div class="proj-name">Nexus</div>
-        <div class="proj-desc">A fast-paced interactive experience where timing is everything. Navigate through challenges with precise timing mechanics and a clean, responsive interface.</div>
-        <div class="proj-tags">
-          <span class="tag">React</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-        </div>
+      <div class="proj-badges"><span class="badge badge-live">● Live</span></div>
+      <div class="proj-number">03</div>
+      <div class="proj-name">PortfolioBio</div>
+      <div class="proj-desc">Allows the average person to create their own online portfolio in minutes — no code required.</div>
+      <div class="proj-tags"><span class="tag">React</span><span class="tag">Express.js</span><span class="tag">MongoDB</span></div>
+      <div class="proj-actions"><a href="#" class="proj-btn proj-btn-primary">View →</a><a href="#" class="proj-btn proj-btn-secondary">Details</a></div>
+    </div>
+
+    <!-- Quote card (no banner) -->
+    <div class="proj-card span-3 quote-card reveal">
+      <div class="quote-text">"Code is poetry written in logic."</div>
+      <div class="quote-author">— Marco Ramcharan</div>
+    </div>
+
+    <!-- Stat card (no banner) -->
+    <div class="proj-card span-3 stat-card reveal">
+      <div class="stat-big">6<span>+</span></div>
+      <div class="stat-sub">Projects Shipped</div>
+    </div>
+
+    <!-- 04 — Indeed Clone -->
+    <div class="proj-card span-4 reveal" data-tags="personal react fullstack">
+      <div class="proj-banner">
+        <img src="/images/nexus.png" alt="Indeed Clone preview" />
+        <div class="banner-label">Indeed Clone</div>
       </div>
-    </a>
+      <div class="proj-number">04</div>
+      <div class="proj-name">Indeed Clone</div>
+      <div class="proj-desc">Job search platform clone with custom filtering and real-time search. Built to explore complex search and filtering patterns at scale.</div>
+      <div class="proj-tags"><span class="tag">React</span><span class="tag">Express.js</span><span class="tag">MongoDB</span></div>
+      <div class="proj-actions"><a href="#" class="proj-btn proj-btn-primary">View →</a><a href="#" class="proj-btn proj-btn-secondary">Details</a></div>
+    </div>
+
+    <!-- 05 — AI Translator -->
+    <div class="proj-card span-5 reveal" data-tags="personal fullstack">
+      <div class="proj-banner">
+        <img src="/images/nexus.png" alt="AI Translator preview" />
+        <div class="banner-label">AI Translator</div>
+      </div>
+      <div class="proj-badges"><span class="badge badge-personal">Personal</span></div>
+      <div class="proj-number">05</div>
+      <div class="proj-name">AI Translator</div>
+      <div class="proj-desc">Intelligent chatbot with natural language processing and machine learning integration. Translates between languages using OpenAI's API with a clean, fast interface.</div>
+      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag">OpenAI</span></div>
+      <div class="proj-actions"><a href="#" class="proj-btn proj-btn-primary">View →</a><a href="#" class="proj-btn proj-btn-secondary">Details</a></div>
+    </div>
+
+    <!-- 06 — NFT Shop -->
+    <div class="proj-card span-6 reveal" data-tags="personal fullstack">
+      <div class="proj-banner" style="height:160px">
+        <img src="/images/nexus.png" alt="NFT Shop preview" />
+        <div class="banner-label">NFT Shop</div>
+      </div>
+      <div class="proj-number">06</div>
+      <div class="proj-name">NFT Shop</div>
+      <div class="proj-desc">Full-stack e-commerce platform with payment integration, inventory management, and a complete admin dashboard. Built to handle real transactions with a clean, fast front-end and robust back-end architecture.</div>
+      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag alt">E-Commerce</span><span class="tag alt">Payments</span></div>
+      <div class="proj-actions"><a href="#" class="proj-btn proj-btn-primary">View →</a><a href="#" class="proj-btn proj-btn-secondary">Details</a></div>
+    </div>
+
+    <!-- 07 — Truendo -->
+    <div class="proj-card span-6 reveal" data-tags="work live fullstack react">
+      <div class="proj-banner" style="height:160px">
+        <img src="/images/nexus.png" alt="Truendo preview" />
+        <div class="banner-label">Truendo</div>
+      </div>
+      <div class="proj-badges"><span class="badge badge-work">Work</span><span class="badge badge-live">● Production</span></div>
+      <div class="proj-number">07 — Production</div>
+      <div class="proj-name">Truendo</div>
+      <div class="proj-desc">Enterprise consent management platform built at Decidio. Full-stack development on a live product serving enterprise clients — handling complex privacy compliance flows, real-time data management, and high-availability infrastructure.</div>
+      <div class="proj-tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Go</span><span class="tag">Kubernetes</span><span class="tag">Docker</span></div>
+      <div class="proj-actions"><a href="https://truendo.com" target="_blank" class="proj-btn proj-btn-primary">View Live →</a><a href="#" class="proj-btn proj-btn-secondary">Details</a></div>
+    </div>
+
+    <!-- Stat cards (no banner) -->
+    <div class="proj-card span-3 stat-card reveal"><div class="stat-big" style="color:var(--green)">3<span style="color:var(--green)">+</span></div><div class="stat-sub">Years of Coding</div></div>
+    <div class="proj-card span-3 stat-card reveal"><div class="stat-big">50<span>+</span></div><div class="stat-sub">Commits This Month</div></div>
+    <div class="proj-card span-3 stat-card reveal"><div class="stat-big" style="color:var(--orange)">2</div><div class="stat-sub">Live Products</div></div>
+    <div class="proj-card span-3 stat-card reveal" style="background:var(--cyan-dim);border-color:rgba(0,212,255,0.2);"><div class="stat-big" style="color:var(--cyan)">∞</div><div class="stat-sub">Coffee Consumed</div></div>
+
+    <!-- CTA row (no banner) -->
+    <div class="proj-card span-12 reveal" style="background:var(--bg2);border-left:3px solid var(--orange);flex-direction:row;align-items:center;justify-content:space-between;gap:2rem;padding:2.5rem 3rem;flex-wrap:wrap;">
+      <div style="flex:1;min-width:260px;">
+        <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);margin-bottom:0.6rem;">// Currently</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--white);line-height:1.2;margin-bottom:0.75rem;">Obsessed with building <span style="color:var(--orange)">seamless user experiences.</span></div>
+        <div style="font-size:0.75rem;color:var(--muted);line-height:1.6;">Always open to new opportunities and interesting problems to solve.</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="/contact" class="proj-btn proj-btn-primary" style="display:inline-block;width:auto;padding:0.85rem 2rem;font-size:0.72rem;white-space:nowrap;">Let's Build Together →</a>
+      </div>
+    </div>
 
   </div>
 
@@ -512,7 +492,7 @@
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
   (function animRing(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
-  document.querySelectorAll('a,button').forEach(el=>{
+  document.querySelectorAll('a,button,.proj-btn,.filter-btn').forEach(el=>{
     el.addEventListener('mouseenter',()=>{ cursor.classList.add('hover'); ring.classList.add('hover'); });
     el.addEventListener('mouseleave',()=>{ cursor.classList.remove('hover'); ring.classList.remove('hover'); });
   });
@@ -536,6 +516,15 @@
   document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',()=>toggleMenu(true)));
   document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&mobileMenu.classList.contains('open')) toggleMenu(true); });
 
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.06});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay=(i*0.05)+'s';
+    observer.observe(el);
+  });
+
   // FILTER
   document.querySelectorAll('.filter-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -544,9 +533,9 @@
       const filter=btn.dataset.filter;
       document.querySelectorAll('.proj-card[data-tags]').forEach(card=>{
         if(filter==='all'||(card.dataset.tags&&card.dataset.tags.includes(filter))) {
-          card.style.display='block';
+          card.classList.remove('hidden');
         } else {
-          card.style.display='none';
+          card.classList.add('hidden');
         }
       });
     });
