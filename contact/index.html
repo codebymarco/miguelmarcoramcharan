@@ -172,7 +172,7 @@
   @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,255,163,.4)} 50%{box-shadow:0 0 0 6px rgba(0,255,163,0)} }
 
   /* MAIN GRID */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; margin-bottom: 4rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start; margin-bottom: 4rem; }
 
   /* LEFT: CONTACT CHANNELS */
   .channels { display: flex; flex-direction: column; gap: 1px; opacity: 0; animation: fadeUp .6s .25s forwards; }
@@ -388,41 +388,6 @@
           I typically reply within 24 hours. If it's urgent, call me directly.
         </div>
       </div>
-    </div>
-
-    <!-- RIGHT: FORM -->
-    <div class="contact-form">
-      <div class="form-title">Send a <span>message</span></div>
-      <form id="contactForm" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Your Name</label>
-            <input type="text" class="form-input" placeholder="Jane Smith" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-input" placeholder="jane@company.com" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Company / Organisation</label>
-          <input type="text" class="form-input" placeholder="Acme Corp (optional)" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Subject</label>
-          <div class="subject-chips">
-            <label class="chip-label"><input type="radio" name="subject" value="job" checked><span class="chip-text">Job Opportunity</span></label>
-            <label class="chip-label"><input type="radio" name="subject" value="freelance"><span class="chip-text">Freelance Project</span></label>
-            <label class="chip-label"><input type="radio" name="subject" value="collab"><span class="chip-text">Collaboration</span></label>
-            <label class="chip-label"><input type="radio" name="subject" value="other"><span class="chip-text">Other</span></label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Message</label>
-          <textarea class="form-input" placeholder="Tell me about the role, project, or just say hi..." required></textarea>
-        </div>
-        <button type="submit" class="btn-submit" id="submitBtn">Send Message →</button>
-      </form>
     </div>
   </div>
 
