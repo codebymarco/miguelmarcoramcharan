@@ -1,0 +1,2147 @@
+/*
+  ═══════════════════════════════════════════════════════════════
+  MARCO RAMCHARAN — THEME OVERHAUL
+  "Black Elite Studio × Hacker"
+  
+  HOW TO USE:
+  Add this line inside your <head>, AFTER your existing <style> block:
+  <link rel="stylesheet" href="marco-theme-overhaul.css">
+  
+  This file overrides your existing styles — nothing is deleted,
+  everything is surgically replaced. Your HTML stays untouched.
+  ═══════════════════════════════════════════════════════════════
+*/
+
+/* ─── 1. DESIGN TOKENS — the whole vibe lives here ─── */
+:root {
+  /* Pure black foundation — not navy, not charcoal. Black. */
+  --bg:       #000000;
+  --bg2:      #050505;
+  --surface:  #0a0a0a;
+
+  /* Borders: barely-there, surgical */
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.1);
+
+  /* Accent — electric cyan, used sparingly */
+  --cyan:         #00d4ff;
+  --cyan-dim:     rgba(0,212,255,0.06);
+  --cyan-glow:    rgba(0,212,255,0.25);
+
+  /* Typography */
+  --white:  #ffffff;
+  --text:   rgba(255,255,255,0.55);
+  --muted:  rgba(255,255,255,0.28);
+
+  /* Kill the orange entirely — monochrome + cyan only */
+  --orange: var(--cyan);
+  --green:  #00ff94;
+  --red:    #ff3b3b;
+}
+
+/* ─── 2. BODY & GLOBAL ─── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  /* Sharper, more editorial font weight */
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* Noise overlay — finer grain, higher contrast */
+body::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ─── 3. NAV — glass black, razor border ─── */
+nav {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 1.1rem 4rem;
+}
+
+.nav-logo {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--white);
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a::after { background: var(--white); }
+
+.nav-cta {
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  padding: 0.45rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.nav-cta:hover {
+  background: var(--white);
+  color: var(--bg);
+  border-color: var(--white);
+  box-shadow: none;
+}
+
+/* ─── 4. HERO ─── */
+.hero {
+  background: var(--bg);
+}
+
+/* Grid — much more subtle, just a whisper */
+.hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 80%);
+}
+
+/* Glow orbs — less saturated, more cinematic */
+.hero-glow {
+  background: radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 65%);
+  width: 800px; height: 800px;
+  top: -20%; left: -15%;
+}
+.hero-glow-2 {
+  background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 65%);
+}
+
+/* Hero label */
+.hero-label {
+  color: rgba(255,255,255,0.3);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+}
+.hero-label::before { color: var(--cyan); opacity: 1; }
+
+/* Hero name — white on black, surgical */
+.hero-name {
+  color: var(--white);
+  font-size: clamp(3.2rem, 6.5vw, 6rem);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+.hero-name .line-accent {
+  color: var(--white);
+  /* Subtle cyan underline instead of colour change */
+  position: relative;
+  display: inline-block;
+}
+.hero-name .line-accent::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* Tagline */
+.hero-tagline {
+  border-left: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.38);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  padding-left: 1.25rem;
+}
+.hero-tagline strong {
+  color: rgba(255,255,255,0.75);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--white);
+  color: var(--bg);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 0.9rem 2.25rem;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 40px rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border-color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 0.9rem 2.25rem;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: var(--white);
+}
+
+/* Status badge */
+.status-badge {
+  border-color: rgba(0,255,148,0.2);
+  color: var(--green);
+  background: rgba(0,255,148,0.04);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+}
+
+/* Scroll indicator */
+.scroll-line {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+}
+.hero-scroll span {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+}
+
+/* ─── 5. STAT GRID — pure black cards ─── */
+.stat-grid {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  gap: 1px;
+}
+
+.stat-item {
+  background: var(--bg);
+  padding: 2.25rem 1.75rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-item:hover { background: #0a0a0a; }
+.stat-item:hover::before { opacity: 1; }
+
+.stat-number {
+  font-size: 2.75rem;
+  color: var(--white);
+  letter-spacing: -0.03em;
+}
+.stat-number span { color: var(--cyan); }
+
+.stat-label {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+}
+
+/* ─── 6. SECTION LABELS & TITLES ─── */
+.section-label {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+}
+.section-label::before { color: var(--cyan); }
+
+.section-title {
+  color: var(--white);
+  letter-spacing: -0.025em;
+}
+
+/* ─── 7. ABOUT ─── */
+.about-section { background: var(--bg); }
+
+.about-story {
+  color: rgba(255,255,255,0.5);
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+.about-story .highlight {
+  color: var(--cyan);
+  font-style: normal;
+}
+.about-story .highlight-orange {
+  color: rgba(255,255,255,0.85);
+}
+
+.meta-row {
+  border-bottom-color: rgba(255,255,255,0.05);
+  padding: 1.1rem 0;
+}
+.meta-key {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+}
+.meta-val {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem;
+}
+.meta-val a { color: var(--cyan); }
+.meta-val[style*="green"] { color: var(--green) !important; }
+
+/* ─── 8. PROJECTS ─── */
+.projects-section { background: #030303; }
+
+.project-card {
+  border-color: rgba(255,255,255,0.05);
+  background: #050505;
+}
+.project-card:hover { border-color: rgba(255,255,255,0.15); }
+
+.project-number {
+  color: rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.6);
+  border-color: rgba(255,255,255,0.07);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+}
+.project-card:hover .project-number {
+  color: var(--cyan);
+  border-color: rgba(0,212,255,0.25);
+}
+
+.project-arrow {
+  border-color: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,0.35);
+}
+.project-card:hover .project-arrow {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08);
+}
+
+.project-name {
+  color: var(--white);
+  font-size: 1.4rem;
+}
+.project-card:hover .project-name { color: var(--white); }
+
+.project-desc {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.72rem;
+}
+
+.tag {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+}
+
+/* ─── 9. SKILLS ─── */
+.skills-section { background: var(--bg); }
+
+.skill-category-title {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+}
+.skill-category-title::after {
+  background: rgba(255,255,255,0.05);
+}
+
+.skill-pill {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 0.55rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.skill-pill:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+}
+.skill-pill.core {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+.skill-pill.core:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+/* Security pills — keep the cyan accent, not orange */
+.skill-pill[style*="orange"] {
+  color: var(--cyan) !important;
+  border-color: rgba(0,212,255,0.25) !important;
+  background: rgba(0,212,255,0.05) !important;
+}
+
+/* ─── 10. TIMELINE / EXPERIENCE ─── */
+.story-section { background: #030303; }
+
+.story-timeline::before {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.03), transparent);
+}
+
+.timeline-dot {
+  border-color: rgba(255,255,255,0.25);
+  background: var(--bg);
+  width: 7px; height: 7px;
+}
+
+.timeline-date {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+}
+
+.timeline-role {
+  color: var(--white);
+  font-size: 1.05rem;
+}
+
+.timeline-company {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.7rem;
+}
+
+.timeline-desc {
+  color: rgba(255,255,255,0.42);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+/* ─── 11. CONTACT ─── */
+.contact-section { background: var(--bg); }
+
+.contact-big-text {
+  color: var(--white);
+  letter-spacing: -0.025em;
+}
+.contact-big-text span { color: var(--cyan); }
+
+.contact-sub {
+  color: rgba(255,255,255,0.28);
+  font-size: 0.75rem;
+  line-height: 1.8;
+}
+
+.contact-link {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.72rem;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.contact-link:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--white);
+}
+.contact-link-label {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+}
+
+/* ─── 12. FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top-color: rgba(255,255,255,0.05);
+  padding: 1.75rem 4rem;
+}
+
+.footer-copy {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.62rem;
+}
+.footer-copy span { color: rgba(255,255,255,0.35); }
+
+.footer-links a {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ─── 13. MOBILE MENU ─── */
+.mobile-menu { background: #000000; }
+.mobile-menu::after {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.mobile-menu-nav li { border-color: rgba(255,255,255,0.05); }
+.mobile-menu-nav a { color: var(--white); }
+.mobile-menu-nav a:hover { color: var(--cyan); }
+.mobile-link-num { color: rgba(255,255,255,0.15); }
+
+.nav-hamburger {
+  border-color: rgba(255,255,255,0.1);
+}
+.nav-hamburger span { background: rgba(255,255,255,0.6); }
+.nav-hamburger:hover { border-color: rgba(255,255,255,0.3); }
+.nav-hamburger.open span { background: var(--white); }
+
+/* ─── 14. REVEAL ANIMATION — snappier ─── */
+.reveal {
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ─── 15. CURSOR — white dot on black ─── */
+.cursor {
+  background: var(--white);
+  mix-blend-mode: difference;
+  width: 8px; height: 8px;
+}
+.cursor-ring {
+  border-color: rgba(255,255,255,0.25);
+  width: 32px; height: 32px;
+}
+.cursor.hover { width: 12px; height: 12px; }
+.cursor-ring.hover {
+  width: 44px; height: 44px;
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ─── 16. SELECTION ─── */
+::selection {
+  background: rgba(0,212,255,0.2);
+  color: var(--white);
+}
+
+/* ─── 17. SCROLLBAR — minimal ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ─── 18. MOBILE OVERRIDES ─── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  footer { padding: 1.75rem 1.25rem; }
+
+  .project-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.97) 0%,
+      rgba(0,0,0,0.7) 55%,
+      rgba(0,0,0,0.1) 100%
+    );
+  }
+}
+
+/*
+  ═══════════════════════════════════════════════════════════════
+  MARCO RAMCHARAN — THEME OVERHAUL
+  "Black Elite Studio × Hacker"
+  
+  HOW TO USE:
+  Add this line inside your <head>, AFTER your existing <style> block:
+  <link rel="stylesheet" href="marco-theme-overhaul.css">
+  
+  This file overrides your existing styles — nothing is deleted,
+  everything is surgically replaced. Your HTML stays untouched.
+  ═══════════════════════════════════════════════════════════════
+*/
+
+/* ─── 1. DESIGN TOKENS — the whole vibe lives here ─── */
+:root {
+  /* Pure black foundation — not navy, not charcoal. Black. */
+  --bg:       #000000;
+  --bg2:      #050505;
+  --surface:  #0a0a0a;
+
+  /* Borders: barely-there, surgical */
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.1);
+
+  /* Accent — electric cyan, used sparingly */
+  --cyan:         #00d4ff;
+  --cyan-dim:     rgba(0,212,255,0.06);
+  --cyan-glow:    rgba(0,212,255,0.25);
+
+  /* Typography */
+  --white:  #ffffff;
+  --text:   rgba(255,255,255,0.55);
+  --muted:  rgba(255,255,255,0.28);
+
+  /* Kill the orange entirely — monochrome + cyan only */
+  --orange: var(--cyan);
+  --green:  #00ff94;
+  --red:    #ff3b3b;
+}
+
+/* ─── 2. BODY & GLOBAL ─── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  /* Sharper, more editorial font weight */
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* Noise overlay — finer grain, higher contrast */
+body::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ─── 3. NAV — glass black, razor border ─── */
+nav {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 1.1rem 4rem;
+}
+
+.nav-logo {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--white);
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a::after { background: var(--white); }
+
+.nav-cta {
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  padding: 0.45rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.nav-cta:hover {
+  background: var(--white);
+  color: var(--bg);
+  border-color: var(--white);
+  box-shadow: none;
+}
+
+/* ─── 4. HERO ─── */
+.hero {
+  background: var(--bg);
+}
+
+/* Grid — much more subtle, just a whisper */
+.hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 80%);
+}
+
+/* Glow orbs — less saturated, more cinematic */
+.hero-glow {
+  background: radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 65%);
+  width: 800px; height: 800px;
+  top: -20%; left: -15%;
+}
+.hero-glow-2 {
+  background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 65%);
+}
+
+/* Hero label */
+.hero-label {
+  color: rgba(255,255,255,0.3);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+}
+.hero-label::before { color: var(--cyan); opacity: 1; }
+
+/* Hero name — white on black, surgical */
+.hero-name {
+  color: var(--white);
+  font-size: clamp(3.2rem, 6.5vw, 6rem);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+.hero-name .line-accent {
+  color: var(--white);
+  /* Subtle cyan underline instead of colour change */
+  position: relative;
+  display: inline-block;
+}
+.hero-name .line-accent::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* Tagline */
+.hero-tagline {
+  border-left: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.38);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  padding-left: 1.25rem;
+}
+.hero-tagline strong {
+  color: rgba(255,255,255,0.75);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--white);
+  color: var(--bg);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 0.9rem 2.25rem;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 40px rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border-color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 0.9rem 2.25rem;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: var(--white);
+}
+
+/* Status badge */
+.status-badge {
+  border-color: rgba(0,255,148,0.2);
+  color: var(--green);
+  background: rgba(0,255,148,0.04);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+}
+
+/* Scroll indicator */
+.scroll-line {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+}
+.hero-scroll span {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+}
+
+/* ─── 5. STAT GRID — pure black cards ─── */
+.stat-grid {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  gap: 1px;
+}
+
+.stat-item {
+  background: var(--bg);
+  padding: 2.25rem 1.75rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-item:hover { background: #0a0a0a; }
+.stat-item:hover::before { opacity: 1; }
+
+.stat-number {
+  font-size: 2.75rem;
+  color: var(--white);
+  letter-spacing: -0.03em;
+}
+.stat-number span { color: var(--cyan); }
+
+.stat-label {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+}
+
+/* ─── 6. SECTION LABELS & TITLES ─── */
+.section-label {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+}
+.section-label::before { color: var(--cyan); }
+
+.section-title {
+  color: var(--white);
+  letter-spacing: -0.025em;
+}
+
+/* ─── 7. ABOUT ─── */
+.about-section { background: var(--bg); }
+
+.about-story {
+  color: rgba(255,255,255,0.5);
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+.about-story .highlight {
+  color: var(--cyan);
+  font-style: normal;
+}
+.about-story .highlight-orange {
+  color: rgba(255,255,255,0.85);
+}
+
+.meta-row {
+  border-bottom-color: rgba(255,255,255,0.05);
+  padding: 1.1rem 0;
+}
+.meta-key {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+}
+.meta-val {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem;
+}
+.meta-val a { color: var(--cyan); }
+.meta-val[style*="green"] { color: var(--green) !important; }
+
+/* ─── 8. PROJECTS ─── */
+.projects-section { background: #030303; }
+
+.project-card {
+  border-color: rgba(255,255,255,0.05);
+  background: #050505;
+}
+.project-card:hover { border-color: rgba(255,255,255,0.15); }
+
+.project-number {
+  color: rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.6);
+  border-color: rgba(255,255,255,0.07);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+}
+.project-card:hover .project-number {
+  color: var(--cyan);
+  border-color: rgba(0,212,255,0.25);
+}
+
+.project-arrow {
+  border-color: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,0.35);
+}
+.project-card:hover .project-arrow {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08);
+}
+
+.project-name {
+  color: var(--white);
+  font-size: 1.4rem;
+}
+.project-card:hover .project-name { color: var(--white); }
+
+.project-desc {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.72rem;
+}
+
+.tag {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+}
+
+/* ─── 9. SKILLS ─── */
+.skills-section { background: var(--bg); }
+
+.skill-category-title {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+}
+.skill-category-title::after {
+  background: rgba(255,255,255,0.05);
+}
+
+.skill-pill {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 0.55rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.skill-pill:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+}
+.skill-pill.core {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+.skill-pill.core:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+/* Security pills — keep the cyan accent, not orange */
+.skill-pill[style*="orange"] {
+  color: var(--cyan) !important;
+  border-color: rgba(0,212,255,0.25) !important;
+  background: rgba(0,212,255,0.05) !important;
+}
+
+/* ─── 10. TIMELINE / EXPERIENCE ─── */
+.story-section { background: #030303; }
+
+.story-timeline::before {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.03), transparent);
+}
+
+.timeline-dot {
+  border-color: rgba(255,255,255,0.25);
+  background: var(--bg);
+  width: 7px; height: 7px;
+}
+
+.timeline-date {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+}
+
+.timeline-role {
+  color: var(--white);
+  font-size: 1.05rem;
+}
+
+.timeline-company {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.7rem;
+}
+
+.timeline-desc {
+  color: rgba(255,255,255,0.42);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+/* ─── 11. CONTACT ─── */
+.contact-section { background: var(--bg); }
+
+.contact-big-text {
+  color: var(--white);
+  letter-spacing: -0.025em;
+}
+.contact-big-text span { color: var(--cyan); }
+
+.contact-sub {
+  color: rgba(255,255,255,0.28);
+  font-size: 0.75rem;
+  line-height: 1.8;
+}
+
+.contact-link {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.72rem;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.contact-link:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--white);
+}
+.contact-link-label {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+}
+
+/* ─── 12. FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top-color: rgba(255,255,255,0.05);
+  padding: 1.75rem 4rem;
+}
+
+.footer-copy {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.62rem;
+}
+.footer-copy span { color: rgba(255,255,255,0.35); }
+
+.footer-links a {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ─── 13. MOBILE MENU ─── */
+.mobile-menu { background: #000000; }
+.mobile-menu::after {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.mobile-menu-nav li { border-color: rgba(255,255,255,0.05); }
+.mobile-menu-nav a { color: var(--white); }
+.mobile-menu-nav a:hover { color: var(--cyan); }
+.mobile-link-num { color: rgba(255,255,255,0.15); }
+
+.nav-hamburger {
+  border-color: rgba(255,255,255,0.1);
+}
+.nav-hamburger span { background: rgba(255,255,255,0.6); }
+.nav-hamburger:hover { border-color: rgba(255,255,255,0.3); }
+.nav-hamburger.open span { background: var(--white); }
+
+/* ─── 14. REVEAL ANIMATION — snappier ─── */
+.reveal {
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ─── 15. CURSOR — white dot on black ─── */
+.cursor {
+  background: var(--white);
+  mix-blend-mode: difference;
+  width: 8px; height: 8px;
+}
+.cursor-ring {
+  border-color: rgba(255,255,255,0.25);
+  width: 32px; height: 32px;
+}
+.cursor.hover { width: 12px; height: 12px; }
+.cursor-ring.hover {
+  width: 44px; height: 44px;
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ─── 16. SELECTION ─── */
+::selection {
+  background: rgba(0,212,255,0.2);
+  color: var(--white);
+}
+
+/* ─── 17. SCROLLBAR — minimal ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ─── 18. ABOUT PAGE SPECIFIC ─── */
+
+/* Page header */
+.page-label {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+}
+.page-label::before { color: var(--cyan); }
+.page-title { color: var(--white); }
+.page-sub { color: rgba(255,255,255,0.22); }
+.page-sub span { color: var(--cyan); }
+
+/* Tinder card chrome */
+.tinder-chrome {
+  background: #080808;
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+}
+.tinder-topbar {
+  background: #080808;
+  border-bottom-color: rgba(255,255,255,0.05);
+}
+.tinder-logo { color: var(--white); }
+.tinder-icons span { color: rgba(255,255,255,0.25); }
+.tinder-icons span:hover { color: rgba(255,255,255,0.6); }
+.tinder-actions {
+  background: #080808;
+  border-top-color: rgba(255,255,255,0.05);
+}
+
+/* Action buttons */
+.btn-rewind { background: #0a0a0a; border-color: rgba(255,255,255,0.06); }
+.btn-nope   { background: #0a0a0a; border-color: rgba(255,71,87,0.15); box-shadow: 0 0 20px rgba(255,59,59,0.08); }
+.btn-super  { background: #0a0a0a; border-color: rgba(77,201,246,0.15); }
+.btn-like   { background: #0a0a0a; border-color: rgba(0,255,148,0.15); box-shadow: 0 0 20px rgba(0,255,148,0.06); }
+.btn-boost  { background: #0a0a0a; border-color: rgba(191,95,255,0.15); }
+
+/* Profile sections */
+.profile-section {
+  background: #050505;
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.ps-title {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+}
+
+/* Searching for */
+.searching-item {
+  color: rgba(255,255,255,0.45);
+  border-left-color: rgba(255,255,255,0.06);
+  font-size: 0.95rem;
+}
+.searching-item:hover {
+  border-left-color: var(--cyan);
+  color: rgba(255,255,255,0.8);
+}
+
+/* About text */
+.about-text {
+  color: rgba(255,255,255,0.45);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.about-text .hl { color: var(--cyan); font-style: normal; }
+.about-text .hl-o { color: rgba(255,255,255,0.75); }
+
+/* Essentials */
+.essential-row {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.72rem;
+}
+.essential-row:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+}
+.essential-icon { opacity: 0.4; }
+
+/* Skills cloud on about page */
+.s-pill {
+  color: rgba(255,255,255,0.38);
+  border-color: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  border-radius: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+}
+.s-pill:hover {
+  border-color: rgba(255,255,255,0.18);
+  color: var(--white);
+  background: rgba(255,255,255,0.04);
+}
+.s-pill.core {
+  color: rgba(255,255,255,0.78);
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+}
+.s-pill.core:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+/* Experience timeline */
+.exp-list::before {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.03), transparent);
+}
+.exp-dot {
+  border-color: rgba(255,255,255,0.2);
+  background: #050505;
+  width: 9px; height: 9px;
+}
+.exp-date {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+}
+.exp-role { color: var(--white); }
+.exp-company { color: rgba(255,255,255,0.22); }
+.exp-desc {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.73rem;
+  line-height: 1.75;
+}
+
+/* Education */
+.edu-icon {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.06);
+  border-radius: 0;
+}
+.edu-title { color: var(--white); }
+.edu-sub { color: rgba(255,255,255,0.25); }
+
+/* Project cards on about page */
+.proj-card {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.proj-card::before { background: var(--cyan); }
+.proj-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+}
+.proj-badge {
+  background: rgba(0,212,255,0.05);
+  border-color: rgba(0,212,255,0.15);
+  color: var(--cyan);
+  font-size: 0.52rem;
+}
+.proj-name { color: var(--white); }
+.proj-desc { color: rgba(255,255,255,0.28); }
+.proj-tag {
+  color: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.05);
+}
+
+/* Hobbies */
+.hobby-chip {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+  color: rgba(255,255,255,0.38);
+  font-size: 0.68rem;
+}
+.hobby-chip:hover {
+  border-color: rgba(255,255,255,0.15);
+  color: var(--white);
+}
+
+/* Anthems */
+.anthem-card {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.anthem-card:hover { border-color: rgba(255,255,255,0.1); }
+.anthem-art { border-radius: 0 !important; }
+.anthem-song { color: rgba(255,255,255,0.6); }
+.anthem-artist { color: rgba(255,255,255,0.22); }
+
+/* ─── 19. MOBILE OVERRIDES ─── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  footer { padding: 1.75rem 1.25rem; }
+
+  .project-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.97) 0%,
+      rgba(0,0,0,0.7) 55%,
+      rgba(0,0,0,0.1) 100%
+    );
+  }
+}
+
+/*
+  ═══════════════════════════════════════════════════════════════
+  MARCO RAMCHARAN — THEME OVERHAUL
+  "Black Elite Studio × Hacker"
+  
+  HOW TO USE:
+  Add this line inside your <head>, AFTER your existing <style> block:
+  <link rel="stylesheet" href="marco-theme-overhaul.css">
+  
+  This file overrides your existing styles — nothing is deleted,
+  everything is surgically replaced. Your HTML stays untouched.
+  ═══════════════════════════════════════════════════════════════
+*/
+
+/* ─── 1. DESIGN TOKENS — the whole vibe lives here ─── */
+:root {
+  /* Pure black foundation — not navy, not charcoal. Black. */
+  --bg:       #000000;
+  --bg2:      #050505;
+  --surface:  #0a0a0a;
+
+  /* Borders: barely-there, surgical */
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.1);
+
+  /* Accent — electric cyan, used sparingly */
+  --cyan:         #00d4ff;
+  --cyan-dim:     rgba(0,212,255,0.06);
+  --cyan-glow:    rgba(0,212,255,0.25);
+
+  /* Typography */
+  --white:  #ffffff;
+  --text:   rgba(255,255,255,0.55);
+  --muted:  rgba(255,255,255,0.28);
+
+  /* Kill the orange entirely — monochrome + cyan only */
+  --orange: var(--cyan);
+  --green:  #00ff94;
+  --red:    #ff3b3b;
+}
+
+/* ─── 2. BODY & GLOBAL ─── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  /* Sharper, more editorial font weight */
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* Noise overlay — finer grain, higher contrast */
+body::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ─── 3. NAV — glass black, razor border ─── */
+nav {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 1.1rem 4rem;
+}
+
+.nav-logo {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--white);
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a::after { background: var(--white); }
+
+.nav-cta {
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  padding: 0.45rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.nav-cta:hover {
+  background: var(--white);
+  color: var(--bg);
+  border-color: var(--white);
+  box-shadow: none;
+}
+
+/* ─── 4. HERO ─── */
+.hero {
+  background: var(--bg);
+}
+
+/* Grid — much more subtle, just a whisper */
+.hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 40%, black 20%, transparent 80%);
+}
+
+/* Glow orbs — less saturated, more cinematic */
+.hero-glow {
+  background: radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 65%);
+  width: 800px; height: 800px;
+  top: -20%; left: -15%;
+}
+.hero-glow-2 {
+  background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 65%);
+}
+
+/* Hero label */
+.hero-label {
+  color: rgba(255,255,255,0.3);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+}
+.hero-label::before { color: var(--cyan); opacity: 1; }
+
+/* Hero name — white on black, surgical */
+.hero-name {
+  color: var(--white);
+  font-size: clamp(3.2rem, 6.5vw, 6rem);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+.hero-name .line-accent {
+  color: var(--white);
+  /* Subtle cyan underline instead of colour change */
+  position: relative;
+  display: inline-block;
+}
+.hero-name .line-accent::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* Tagline */
+.hero-tagline {
+  border-left: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.38);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  padding-left: 1.25rem;
+}
+.hero-tagline strong {
+  color: rgba(255,255,255,0.75);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--white);
+  color: var(--bg);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 0.9rem 2.25rem;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 40px rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border-color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  padding: 0.9rem 2.25rem;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: var(--white);
+}
+
+/* Status badge */
+.status-badge {
+  border-color: rgba(0,255,148,0.2);
+  color: var(--green);
+  background: rgba(0,255,148,0.04);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+}
+
+/* Scroll indicator */
+.scroll-line {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+}
+.hero-scroll span {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+}
+
+/* ─── 5. STAT GRID — pure black cards ─── */
+.stat-grid {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  gap: 1px;
+}
+
+.stat-item {
+  background: var(--bg);
+  padding: 2.25rem 1.75rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stat-item:hover { background: #0a0a0a; }
+.stat-item:hover::before { opacity: 1; }
+
+.stat-number {
+  font-size: 2.75rem;
+  color: var(--white);
+  letter-spacing: -0.03em;
+}
+.stat-number span { color: var(--cyan); }
+
+.stat-label {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+}
+
+/* ─── 6. SECTION LABELS & TITLES ─── */
+.section-label {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+}
+.section-label::before { color: var(--cyan); }
+
+.section-title {
+  color: var(--white);
+  letter-spacing: -0.025em;
+}
+
+/* ─── 7. ABOUT ─── */
+.about-section { background: var(--bg); }
+
+.about-story {
+  color: rgba(255,255,255,0.5);
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+.about-story .highlight {
+  color: var(--cyan);
+  font-style: normal;
+}
+.about-story .highlight-orange {
+  color: rgba(255,255,255,0.85);
+}
+
+.meta-row {
+  border-bottom-color: rgba(255,255,255,0.05);
+  padding: 1.1rem 0;
+}
+.meta-key {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+}
+.meta-val {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem;
+}
+.meta-val a { color: var(--cyan); }
+.meta-val[style*="green"] { color: var(--green) !important; }
+
+/* ─── 8. PROJECTS ─── */
+.projects-section { background: #030303; }
+
+.project-card {
+  border-color: rgba(255,255,255,0.05);
+  background: #050505;
+}
+.project-card:hover { border-color: rgba(255,255,255,0.15); }
+
+.project-number {
+  color: rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.6);
+  border-color: rgba(255,255,255,0.07);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+}
+.project-card:hover .project-number {
+  color: var(--cyan);
+  border-color: rgba(0,212,255,0.25);
+}
+
+.project-arrow {
+  border-color: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.5);
+  color: rgba(255,255,255,0.35);
+}
+.project-card:hover .project-arrow {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08);
+}
+
+.project-name {
+  color: var(--white);
+  font-size: 1.4rem;
+}
+.project-card:hover .project-name { color: var(--white); }
+
+.project-desc {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.72rem;
+}
+
+.tag {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+}
+
+/* ─── 9. SKILLS ─── */
+.skills-section { background: var(--bg); }
+
+.skill-category-title {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+}
+.skill-category-title::after {
+  background: rgba(255,255,255,0.05);
+}
+
+.skill-pill {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 0.55rem 1.1rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.skill-pill:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+}
+.skill-pill.core {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+.skill-pill.core:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+/* Security pills — keep the cyan accent, not orange */
+.skill-pill[style*="orange"] {
+  color: var(--cyan) !important;
+  border-color: rgba(0,212,255,0.25) !important;
+  background: rgba(0,212,255,0.05) !important;
+}
+
+/* ─── 10. TIMELINE / EXPERIENCE ─── */
+.story-section { background: #030303; }
+
+.story-timeline::before {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.03), transparent);
+}
+
+.timeline-dot {
+  border-color: rgba(255,255,255,0.25);
+  background: var(--bg);
+  width: 7px; height: 7px;
+}
+
+.timeline-date {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+}
+
+.timeline-role {
+  color: var(--white);
+  font-size: 1.05rem;
+}
+
+.timeline-company {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.7rem;
+}
+
+.timeline-desc {
+  color: rgba(255,255,255,0.42);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+/* ─── 11. CONTACT ─── */
+.contact-section { background: var(--bg); }
+
+.contact-big-text {
+  color: var(--white);
+  letter-spacing: -0.025em;
+}
+.contact-big-text span { color: var(--cyan); }
+
+.contact-sub {
+  color: rgba(255,255,255,0.28);
+  font-size: 0.75rem;
+  line-height: 1.8;
+}
+
+.contact-link {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.72rem;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.contact-link:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.14);
+  color: var(--white);
+}
+.contact-link-label {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+}
+
+/* ─── 12. FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top-color: rgba(255,255,255,0.05);
+  padding: 1.75rem 4rem;
+}
+
+.footer-copy {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.62rem;
+}
+.footer-copy span { color: rgba(255,255,255,0.35); }
+
+.footer-links a {
+  color: rgba(255,255,255,0.18);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.footer-links a:hover { color: var(--white); }
+
+/* ─── 13. MOBILE MENU ─── */
+.mobile-menu { background: #000000; }
+.mobile-menu::after {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.mobile-menu-nav li { border-color: rgba(255,255,255,0.05); }
+.mobile-menu-nav a { color: var(--white); }
+.mobile-menu-nav a:hover { color: var(--cyan); }
+.mobile-link-num { color: rgba(255,255,255,0.15); }
+
+.nav-hamburger {
+  border-color: rgba(255,255,255,0.1);
+}
+.nav-hamburger span { background: rgba(255,255,255,0.6); }
+.nav-hamburger:hover { border-color: rgba(255,255,255,0.3); }
+.nav-hamburger.open span { background: var(--white); }
+
+/* ─── 14. REVEAL ANIMATION — snappier ─── */
+.reveal {
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ─── 15. CURSOR — white dot on black ─── */
+.cursor {
+  background: var(--white);
+  mix-blend-mode: difference;
+  width: 8px; height: 8px;
+}
+.cursor-ring {
+  border-color: rgba(255,255,255,0.25);
+  width: 32px; height: 32px;
+}
+.cursor.hover { width: 12px; height: 12px; }
+.cursor-ring.hover {
+  width: 44px; height: 44px;
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ─── 16. SELECTION ─── */
+::selection {
+  background: rgba(0,212,255,0.2);
+  color: var(--white);
+}
+
+/* ─── 17. SCROLLBAR — minimal ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ─── 18. ABOUT PAGE SPECIFIC ─── */
+
+/* Page header */
+.page-label {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+}
+.page-label::before { color: var(--cyan); }
+.page-title { color: var(--white); }
+.page-sub { color: rgba(255,255,255,0.22); }
+.page-sub span { color: var(--cyan); }
+
+/* Tinder card chrome */
+.tinder-chrome {
+  background: #080808;
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+}
+.tinder-topbar {
+  background: #080808;
+  border-bottom-color: rgba(255,255,255,0.05);
+}
+.tinder-logo { color: var(--white); }
+.tinder-icons span { color: rgba(255,255,255,0.25); }
+.tinder-icons span:hover { color: rgba(255,255,255,0.6); }
+.tinder-actions {
+  background: #080808;
+  border-top-color: rgba(255,255,255,0.05);
+}
+
+/* Action buttons */
+.btn-rewind { background: #0a0a0a; border-color: rgba(255,255,255,0.06); }
+.btn-nope   { background: #0a0a0a; border-color: rgba(255,71,87,0.15); box-shadow: 0 0 20px rgba(255,59,59,0.08); }
+.btn-super  { background: #0a0a0a; border-color: rgba(77,201,246,0.15); }
+.btn-like   { background: #0a0a0a; border-color: rgba(0,255,148,0.15); box-shadow: 0 0 20px rgba(0,255,148,0.06); }
+.btn-boost  { background: #0a0a0a; border-color: rgba(191,95,255,0.15); }
+
+/* Profile sections */
+.profile-section {
+  background: #050505;
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.ps-title {
+  color: rgba(255,255,255,0.22);
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+}
+
+/* Searching for */
+.searching-item {
+  color: rgba(255,255,255,0.45);
+  border-left-color: rgba(255,255,255,0.06);
+  font-size: 0.95rem;
+}
+.searching-item:hover {
+  border-left-color: var(--cyan);
+  color: rgba(255,255,255,0.8);
+}
+
+/* About text */
+.about-text {
+  color: rgba(255,255,255,0.45);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.about-text .hl { color: var(--cyan); font-style: normal; }
+.about-text .hl-o { color: rgba(255,255,255,0.75); }
+
+/* Essentials */
+.essential-row {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.72rem;
+}
+.essential-row:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+}
+.essential-icon { opacity: 0.4; }
+
+/* Skills cloud on about page */
+.s-pill {
+  color: rgba(255,255,255,0.38);
+  border-color: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  border-radius: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+}
+.s-pill:hover {
+  border-color: rgba(255,255,255,0.18);
+  color: var(--white);
+  background: rgba(255,255,255,0.04);
+}
+.s-pill.core {
+  color: rgba(255,255,255,0.78);
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+}
+.s-pill.core:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+/* Experience timeline */
+.exp-list::before {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.03), transparent);
+}
+.exp-dot {
+  border-color: rgba(255,255,255,0.2);
+  background: #050505;
+  width: 9px; height: 9px;
+}
+.exp-date {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+}
+.exp-role { color: var(--white); }
+.exp-company { color: rgba(255,255,255,0.22); }
+.exp-desc {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.73rem;
+  line-height: 1.75;
+}
+
+/* Education */
+.edu-icon {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.06);
+  border-radius: 0;
+}
+.edu-title { color: var(--white); }
+.edu-sub { color: rgba(255,255,255,0.25); }
+
+/* Project cards on about page */
+.proj-card {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.proj-card::before { background: var(--cyan); }
+.proj-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+}
+.proj-badge {
+  background: rgba(0,212,255,0.05);
+  border-color: rgba(0,212,255,0.15);
+  color: var(--cyan);
+  font-size: 0.52rem;
+}
+.proj-name { color: var(--white); }
+.proj-desc { color: rgba(255,255,255,0.28); }
+.proj-tag {
+  color: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.05);
+}
+
+/* Hobbies */
+.hobby-chip {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+  color: rgba(255,255,255,0.38);
+  font-size: 0.68rem;
+}
+.hobby-chip:hover {
+  border-color: rgba(255,255,255,0.15);
+  color: var(--white);
+}
+
+/* Anthems */
+.anthem-card {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.anthem-card:hover { border-color: rgba(255,255,255,0.1); }
+.anthem-art { border-radius: 0 !important; }
+.anthem-song { color: rgba(255,255,255,0.6); }
+.anthem-artist { color: rgba(255,255,255,0.22); }
+
+/* ─── 19. PROJECTS PAGE ─── */
+
+.hero-left h1 { color: var(--white); letter-spacing: -0.03em; }
+.hero-left h1 span { color: var(--cyan); }
+.hero-left .label { color: rgba(255,255,255,0.25); font-size: 0.6rem; letter-spacing: 0.28em; }
+.hero-right p { color: rgba(255,255,255,0.28); font-size: 0.9rem; }
+
+.filter-bar { border-bottom-color: rgba(255,255,255,0.05); }
+.filter-label { color: rgba(255,255,255,0.2); font-size: 0.58rem; letter-spacing: 0.18em; }
+.filter-btn { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.28); font-size: 0.62rem; }
+.filter-btn:hover { border-color: rgba(255,255,255,0.14); color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.03); }
+.filter-btn.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.05); }
+
+.proj-card { border-color: rgba(255,255,255,0.05); background: #050505; }
+.proj-card:hover { border-color: rgba(255,255,255,0.15); }
+.proj-num { color: rgba(255,255,255,0.28); background: rgba(0,0,0,0.65); border-color: rgba(255,255,255,0.06); font-size: 0.55rem; }
+.proj-card:hover .proj-num { color: var(--cyan); border-color: rgba(0,212,255,0.2); }
+.proj-arrow { border-color: rgba(255,255,255,0.08); background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.28); }
+.proj-card:hover .proj-arrow { color: var(--white); border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.06); }
+.proj-name { color: var(--white); }
+.proj-card:hover .proj-name { color: var(--white); }
+.proj-desc { color: rgba(255,255,255,0.48); font-size: 0.73rem; }
+.proj-tags .tag { color: rgba(255,255,255,0.38); border-color: rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); font-size: 0.55rem; }
+.badge-live { background: rgba(0,255,148,0.06); color: var(--green); border-color: rgba(0,255,148,0.15); }
+.badge-work { background: rgba(0,212,255,0.05); color: var(--cyan); border-color: rgba(0,212,255,0.15); }
+.badge-personal { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.08); }
+.bottom-cta { background: #050505; border-color: rgba(255,255,255,0.06); }
+.cta-text h3 { color: var(--white); font-size: 1.3rem; }
+.cta-text p { color: rgba(255,255,255,0.25); font-size: 0.72rem; }
+
+/* ─── 20. CAREER PAGE ─── */
+
+.grid-bg { background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 80px 80px; }
+.hero-label { color: rgba(255,255,255,0.25); font-size: 0.6rem; letter-spacing: 0.28em; }
+.page-hero h1 { color: var(--white); }
+.page-hero h1 span { color: var(--cyan); }
+.hero-right p { color: rgba(255,255,255,0.3); font-size: 1rem; }
+.hstat-num { color: var(--white); }
+.hstat-num span { color: var(--cyan); }
+.hstat-label { color: rgba(255,255,255,0.2); font-size: 0.57rem; letter-spacing: 0.14em; }
+
+.skills-snapshot { background: #050505; border-color: rgba(255,255,255,0.05); }
+.snap-label { color: rgba(255,255,255,0.18); font-size: 0.58rem; letter-spacing: 0.22em; }
+.snap-pill { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.38); font-size: 0.65rem; }
+.snap-pill:hover { border-color: rgba(255,255,255,0.18); color: var(--white); background: rgba(255,255,255,0.04); }
+.snap-pill.core { color: rgba(255,255,255,0.78); border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); }
+.snap-pill.core:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+
+.year-nav-item { color: rgba(255,255,255,0.2); border-left-color: rgba(255,255,255,0.06); font-size: 0.6rem; }
+.year-nav-item .yn-period { color: rgba(255,255,255,0.14); font-size: 0.53rem; }
+.year-nav-item.active, .year-nav-item:hover { color: var(--white); border-left-color: var(--white); }
+
+.timeline::before { background: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.03), transparent); }
+
+.job-inner { background: #050505; border-color: rgba(255,255,255,0.05); }
+.job-card:hover .job-inner { border-color: rgba(255,255,255,0.1); background: #080808; }
+.job-topbar { border-bottom-color: rgba(255,255,255,0.05); }
+.job-accent { background: rgba(255,255,255,0.5); }
+.job-accent.orange { background: rgba(255,255,255,0.25); }
+.job-title { color: var(--white); font-size: 1.15rem; }
+.job-company { color: rgba(255,255,255,0.3); }
+.job-location { color: rgba(255,255,255,0.18); }
+.job-period { color: rgba(255,255,255,0.18); }
+.job-dot { border-color: rgba(255,255,255,0.2); background: #000; width: 11px; height: 11px; }
+.job-card:hover .job-dot { background: var(--white); box-shadow: 0 0 10px rgba(255,255,255,0.15); }
+.job-section-title { color: rgba(255,255,255,0.15); font-size: 0.58rem; letter-spacing: 0.22em; }
+.job-section-title::after { background: rgba(255,255,255,0.05); }
+.job-desc { color: rgba(255,255,255,0.4); border-left-color: rgba(255,255,255,0.06); font-size: 0.95rem; line-height: 1.8; }
+.job-card:hover .job-desc { border-left-color: rgba(255,255,255,0.1); }
+
+.resp-grid { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.05); }
+.resp-item { background: #050505; }
+.resp-item:hover { background: #0a0a0a; }
+.resp-num { color: rgba(255,255,255,0.22); }
+.resp-text { color: rgba(255,255,255,0.42); font-size: 0.7rem; }
+
+.j-tag { color: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); font-size: 0.56rem; }
+.j-tag.orange { color: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
+
+.transition-callout { border-color: rgba(255,255,255,0.06); border-left-color: var(--green); background: rgba(0,255,148,0.02); }
+.tc-label { color: var(--green); font-size: 0.57rem; letter-spacing: 0.18em; }
+.tc-text { color: rgba(255,255,255,0.55); font-size: 0.95rem; }
+.tc-text span { color: var(--cyan); }
+
+.edu-card { background: #050505; border-color: rgba(255,255,255,0.05); }
+.edu-card:hover { border-color: rgba(255,255,255,0.1); }
+.edu-icon-big { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); border-radius: 0; }
+.edu-title { color: var(--white); }
+.edu-sub { color: rgba(255,255,255,0.25); font-size: 0.68rem; }
+
+.career-cta { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.05); }
+.cta-half { background: #050505; }
+.cta-half:hover { background: #0a0a0a; }
+.cta-half h3 { color: var(--white); }
+.cta-half p { color: rgba(255,255,255,0.25); font-size: 0.7rem; }
+.btn-cyan { background: var(--white); color: var(--bg); }
+.btn-cyan:hover { box-shadow: 0 0 30px rgba(255,255,255,0.1); transform: translateY(-1px); }
+.btn-outline { border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); }
+.btn-outline:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
+
+/* ─── 21. CONTACT PAGE ─── */
+
+.glow-1 { background: radial-gradient(circle, rgba(0,212,255,0.025) 0%, transparent 65%); }
+.glow-2 { background: radial-gradient(circle, rgba(255,255,255,0.01) 0%, transparent 65%); }
+
+.contact-hero .label { color: rgba(255,255,255,0.22); font-size: 0.58rem; letter-spacing: 0.3em; }
+.contact-hero .label::before, .contact-hero .label::after { background: rgba(255,255,255,0.06); }
+.contact-hero h1 { color: var(--white); }
+.contact-hero h1 span { color: var(--cyan); }
+.contact-hero p { color: rgba(255,255,255,0.28); }
+.status-pill { border-color: rgba(0,255,148,0.15); background: rgba(0,255,148,0.03); color: var(--green); font-size: 0.58rem; }
+
+.channel-title { color: rgba(255,255,255,0.18); font-size: 0.58rem; letter-spacing: 0.22em; }
+.channel-link { background: #050505; border-color: rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); }
+.channel-link::before { background: var(--white); }
+.channel-link:hover { background: #0a0a0a; border-color: rgba(255,255,255,0.12); }
+.channel-icon { border-radius: 0 !important; border-color: rgba(255,255,255,0.06) !important; background: rgba(255,255,255,0.03) !important; }
+.channel-label { color: rgba(255,255,255,0.18); font-size: 0.56rem; letter-spacing: 0.16em; }
+.channel-value { color: rgba(255,255,255,0.65); font-size: 0.72rem; }
+.channel-arrow { color: rgba(255,255,255,0.2); }
+.channel-link:hover .channel-arrow { color: var(--white); }
+
+.response-card { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.05); }
+.response-text { color: rgba(255,255,255,0.38); font-size: 0.68rem; }
+.response-text strong { color: var(--white); font-size: 0.72rem; }
+
+.bottom-strip { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.05); }
+.strip-item { background: #050505; }
+.strip-item:hover { background: #0a0a0a; }
+.strip-num { color: var(--white); }
+.strip-num span { color: var(--cyan); }
+.strip-label { color: rgba(255,255,255,0.18); font-size: 0.58rem; letter-spacing: 0.18em; }
+.toast { background: #050505; border-color: rgba(0,255,148,0.2); color: var(--green); }
+
+/* ─── 22. MOBILE OVERRIDES ─── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  footer { padding: 1.75rem 1.25rem; }
+
+  .project-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.97) 0%,
+      rgba(0,0,0,0.7) 55%,
+      rgba(0,0,0,0.1) 100%
+    );
+  }
+}
