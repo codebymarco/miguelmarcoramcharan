@@ -130,6 +130,7 @@ nav {
   color: var(--white);
   font-size: clamp(3.2rem, 6.5vw, 6rem);
   letter-spacing: -0.03em;
+  white-space: normal;
   line-height: 0.92;
 }
 .hero-name .line-accent {
@@ -2143,5 +2144,42 @@ footer {
       rgba(0,0,0,0.7) 55%,
       rgba(0,0,0,0.1) 100%
     );
+  }
+}
+
+
+@media (max-width: 900px) {
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .stat-item {
+    padding: 1rem 0.75rem;
+  }
+  
+  .stat-label {
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-name {
+    font-size: clamp(1.4rem, 6vw, 2.5rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-name {
+    font-size: clamp(1.4rem, 6vw, 2.5rem);
+  }
+
+  .hero-name .line-accent {
+    display: block; /* already there but make sure this is set */
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-name .line-accent::after {
+    bottom: 0px; /* adjust this until it sits under the text properly */
   }
 }
