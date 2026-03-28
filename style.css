@@ -2215,3 +2215,8 @@ footer {
     padding: 1.5rem;
   }
 }
+
+.type-cursor {
+  color: var(--cyan);
+  animation: blink 1s infinite;
+}
